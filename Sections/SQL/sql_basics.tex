@@ -1,0 +1,76 @@
+\subsection{SQL Basics}
+
+
+
+
+
+SQL stands for ``\textbf{\textit{Structured Query Language}},'' used to query against databases with tables
+containing columns of data, which most often relate to each other.\\
+
+\noindent
+Using select words like \textcolor{blue}{\texttt{SELECT}}, \textcolor{blue}{\texttt{FROM}}, \textcolor{blue}{\texttt{WHERE}},
+ignoring case. It's good practice to use \textbf{all caps for SQL keywords}, and \textbf{lowercase for table and column names}.
+Here's a simple example:\\
+
+\begin{lstlisting}[style=sql]
+    SELECT * FROM my_table
+\end{lstlisting}
+\begin{centering}
+    \textit{Selects all (*) columns from the table \textcolor{blue}{\texttt{my\_table}}.}\\
+\end{centering}
+
+\vspace{1em}
+\noindent
+Now, we are a record company with bands, albums, and songs:\\
+
+
+\begin{lstlisting}[style=sql]
+    CREATE DATABASE test; -- creating a test database
+    DROP DATABASE test; -- deleting the test database
+
+    CREATE DATABASE concise_records; -- creating our database 
+    USE concise_records; -- selecting our database to run commands on it
+
+    CREATE TABLE bandds (); -- creating a table for our bands
+    DROP TABLE bandds; -- deleting it because of our typo
+    
+    -- Create bands table: artist names (at most 255 characters), CANNOT be NULL/EMPTY
+    CREATE TABLE bands (
+        name VARCHAR(255) NOT NULL
+    );
+
+    -- Add id column to bands, auto increment, not NULL, make this column important
+    ALTER TABLE bands 
+    ADD COLUMN id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+\end{lstlisting}
+
+\vspace{1em}
+\noindent
+We created the database, \textcolor{blue}{\texttt{concise\_records}}, and a table \textcolor{blue}{\texttt{bands}}
+with two columns: \textcolor{blue}{\texttt{name}} and \textcolor{blue}{\texttt{id}}.\\
+
+
+\newpage
+
+\noindent
+The \textcolor{blue}{\texttt{PRIMARY KEY}} acts as an ID for each row, useful for
+drawing a thread of relationships between tables where the ID is present.\\
+
+\begin{Def}[Primary Key]
+    .A column which identifies each row in a table. It must be unique, and it cannot be NULL.
+\end{Def}
+
+\noindent
+To create our albums table:
+
+\begin{lstlisting}[style=sql]
+    CREATE TABLE albums (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        release_date DATE NOT NULL,
+    );
+
+\end{lstlisting}
+
+
+
