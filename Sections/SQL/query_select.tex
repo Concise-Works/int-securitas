@@ -1,0 +1,170 @@
+\subsubsection*{SELECT}
+
+We can also retrieve data from our tables using the \textcolor{blue}{\texttt{SELECT}}:
+
+\begin{lstlisting}[style=sql]
+    -- Retrieve all columns from bands
+    SELECT * FROM bands;
+
+    -- Query Result:
+    --     +----+----------------------+
+    --     | id | name                 |
+    --     +----+----------------------+
+    --     | 1  | The Beatles          |
+    --     | 2  | The Rolling Stones   |
+    --     | 3  | The Who              |
+    --     +----+----------------------+
+\end{lstlisting}
+
+\noindent
+Queries to a table return another table.
+
+\newpage
+
+\noindent
+To list a few commands:
+\begin{lstlisting}[style=sql]
+    -- Retrieve the name column from bands
+    SELECT name FROM bands;
+
+    -- Query Result:
+    --     +----------------------+
+    --     | name                 |
+    --     +----------------------+
+    --     | The Beatles          |
+    --     | The Rolling Stones   |
+    --     | The Who              |
+    --     +----------------------+
+\end{lstlisting}
+\begin{lstlisting}[style=sql]
+    -- Retrieve the name column from bands, limit to 2
+    SELECT name FROM bands LIMIT 1;
+
+    -- Query Result:
+    --     +----------------------+
+    --     | name                 |
+    --     +----------------------+
+    --     | The Beatles          |
+    --     +----------------------+
+\end{lstlisting}
+\begin{lstlisting}[style=sql]
+    -- Retrieve and give aliases to id and name columns from bands
+    SELECT id AS 'ID', name AS 'Band Name'
+
+    -- Query Result:
+    --     +----+----------------------+
+    --     | ID | Band Name            |
+    --     +----+----------------------+
+    --     | 1  | The Beatles          |
+    --     | 2  | The Rolling Stones   |
+    --     | 3  | The Who              |
+    --     +----+----------------------+
+\end{lstlisting}
+\begin{lstlisting}[style=sql]
+    -- Order bands by name in descending order
+    SELECT * FROM bands ORDER BY name DESC;
+
+    -- Query Result:
+    --     +----+----------------------+
+    --     | id | name                 |
+    --     +----+----------------------+
+    --     | 1  | The Who              |
+    --     | 2  | The Rolling Stones   |
+    --     | 3  | The Beatles          |
+    --     +----+----------------------+
+
+    -- Order bands in ascending order
+    SELECT * FROM bands ORDER BY name ASC;
+    -- which can be shortened to 
+    SELECT * FROM bands ORDER BY name; -- as ASC is the default
+\end{lstlisting}
+
+\noindent
+Here we used the \textcolor{blue}{\texttt{LIMIT}}, \textcolor{blue}{\texttt{AS}}, and \textcolor{blue}{\texttt{ORDER BY (ASC/DESC)}} commands.
+
+\newpage
+\noindent
+Say we had the table with the following data:
+
+\begin{lstlisting}[style=sql]
+    -- DB: school_table
+    --
+    --     students
+    --     +----+----------------------+
+    --     | id | name                 |
+    --     +----+----------------------+
+    --     | 1  | Joe                  |
+    --     | 2  | Joe                  |
+    --     | 3  | Joe                  |
+    --     | 4  | Alvin                |
+    --     +----+----------------------+
+
+    -- Retrieve all unique names from students
+    USE school_table;
+    SELECT DISTINCT name FROM students;
+
+    -- Query Result:
+    --     +----------------------+
+    --     | name                 |
+    --     +----------------------+
+    --     | Joe                  |
+    --     | Alvin                |
+    --     +----------------------+
+\end{lstlisting}
+
+\subsection*{UPDATE}
+\noindent
+To visit our \textcolor{blue}{\texttt{concise\_records}} example again:
+
+\begin{lstlisting}[style=sql]
+    -- DB: concise_records
+    --
+    --     bands
+    --     +----+----------------------+
+    --     | id | name                 |
+    --     +----+----------------------+
+    --     | 1  | The Beatles          |
+    --     | 2  | The Rolling Stones   |
+    --     | 3  | The Who              |
+    --     +----+----------------------+
+    --    
+    --     albums
+    --     +----+----------------+--------------+---------+
+    --     | id | name           | release_date | band_id |
+    --     +----+----------------+--------------+---------+
+    --     | 1  | Abbey Road     | 1969         | 1       |
+    --     | 2  | Let It Be      | 1970         | 1       |
+    --     | 3  | Who's Next     |              | 3       |
+    --     +----+----------------+--------------+---------+
+\end{lstlisting}
+
+\vspace{1em}
+\noindent
+We will run the \textcolor{blue}{\texttt{UPDATE}} command to change the \textcolor{blue}{\texttt{release\_date}}.
+
+\newpage
+
+\noindent
+To Change the release date of \textcolor{blue}{\texttt{Who's Next} }to 1971:
+\begin{lstlisting}[style=sql]
+    -- We could do
+    UPDATE albums
+    SET release_date = '1971'
+
+    -- But that would result in all albums having the same release date
+    -- instead we use WHERE
+    UPDATE albums SET release_date = '1971' WHERE name = 'Who''s Next';
+
+    -- DB: concise_records
+    --
+    --     albums
+    --     +----+----------------+--------------+---------+
+    --     | id | name           | release_date | band_id |
+    --     +----+----------------+--------------+---------+
+    --     | 1  | Abbey Road     | 1969         | 1       |
+    --     | 2  | Let It Be      | 1970         | 1       |
+    --     | 3  | Who's Next     | 1971         | 3       |
+    --     +----+----------------+--------------+---------+
+\end{lstlisting}
+
+
