@@ -135,21 +135,11 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
 \end{lstlisting}
 
 \noindent
-6. \textcolor{blue}{\texttt{IS NULL}}
+6a. \textcolor{blue}{\texttt{IS NULL}}
 
 \begin{lstlisting}[style=sql]
     -- Add a new album with a NULL release date
     INSERT INTO albums (name, band_id) VALUES ('The Wall', 2);
-
-    -- albums
-    -- +----+----------------+--------------+---------+
-    -- | id | name           | release_date | band_id |
-    -- +----+----------------+--------------+---------+
-    -- | 1  | Abbey Road     | 1969         | 1       |
-    -- | 2  | Let It Be      | 1970         | 1       |
-    -- | 3  | Who's Next     | 1971         | 3       |
-    -- | 4  | The Wall       |              | 2       |
-    -- +----+----------------+--------------+---------+
 
     -- Select all albums with a NULL release date
     SELECT * FROM albums WHERE release_date IS NULL;
@@ -163,10 +153,8 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
     
 \end{lstlisting}
 
-\newpage
-
 \noindent
-7. \textcolor{blue}{\texttt{DELETE}}
+6b. \textcolor{blue}{\texttt{DELETE}}
 
 \begin{lstlisting}[style=sql]
     -- Delete all albums

@@ -1,0 +1,59 @@
+\subsection{Joining Tables}
+We can \textcolor{blue}{JOIN} tables based on common columns, \underline{this serves as their \textbf{relationship}.} We have:
+\begin{lstlisting}[style=sql]
+    -- DB: concise_records
+    --
+    --     bands
+    --     +----+----------------------+
+    --     | id | name                 |
+    --     +----+----------------------+
+    --     | 1  | The Beatles          |
+    --     | 2  | The Rolling Stones   |
+    --     | 3  | The Who              |
+    --     +----+----------------------+
+    --
+    --     albums
+    --     +----+----------------+--------------+---------+
+    --     | id | name           | release_date | band_id |
+    --     +----+----------------+--------------+---------+
+    --     | 1  | Abbey Road     | 1969         | 1       |
+    --     | 2  | Let It Be      | 1970         | 1       |
+    --     | 3  | Who's Next     | 1971         | 3       |
+    --     +----+----------------+--------------+---------+
+\end{lstlisting}
+
+\textbf{Examples:}\\
+1a. \textcolor{blue}{\texttt{JOIN}}
+
+\begin{lstlisting}[style=sql]
+-- Retrieve all columns from bands and albums
+SELECT * FROM bands JOIN albums;
+\end{lstlisting}
+This command doesn't specify how to combine the tables, so the \textbf{Cartesian product} is returned.\\
+
+\begin{Def}[Cartesian Product]
+    .Sets $A=\{a_1,a_2,...,a_n\}$, $B=\{b_1,b_2,...,b_m\}$ can match in ordered pairs, e.g.,\\
+    $(a_2,b_5)$ or $(a_9, b_3)$. The set of all ordered pair combinations of $A$ on $B$ is the Cartesian product.\\
+
+    \noindent
+    Denoted: $A\times B$.
+\end{Def}
+2b.
+\begin{lstlisting}[style=sql]
+    -- Query Result:
+    -- +----+----------------------+----+----------------+--------------+---------+
+    -- | id | name                 | id | name           | release_date | band_id |
+    -- +----+----------------------+----+----------------+--------------+---------+
+    -- |  1 | The Beatles          |  1 | Abbey Road     | 1969         | 1       |
+    -- |  1 | The Beatles          |  2 | Let It Be      | 1970         | 1       |
+    -- |  1 | The Beatles          |  3 | Who's Next     | 1971         | 3       |
+    -- |  2 | The Rolling Stones   |  1 | Abbey Road     | 1969         | 1       |
+    -- |  2 | The Rolling Stones   |  2 | Let It Be      | 1970         | 1       |
+    -- |  2 | The Rolling Stones   |  3 | Who's Next     | 1971         | 3       |
+    -- |  3 | The Who              |  1 | Abbey Road     | 1969         | 1       |
+    -- |  3 | The Who              |  2 | Let It Be      | 1970         | 1       |
+    -- |  3 | The Who              |  3 | Who's Next     | 1971         | 3       |
+    -- +----+----------------------+----+----------------+--------------+---------+
+\end{lstlisting}
+
+
