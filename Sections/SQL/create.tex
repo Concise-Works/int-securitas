@@ -8,9 +8,9 @@ SQL stands for ``\textbf{\textit{Structured Query Language}},'' used to query ag
 containing columns of data, which most often relate to each other.\\
 
 \noindent
-Using key words like \textcolor{blue}{\texttt{SELECT}}, \textcolor{blue}{\texttt{FROM}}, \textcolor{blue}{\texttt{WHERE}},
+SQL uses key words like \textcolor{blue}{\texttt{SELECT}}, \textcolor{blue}{\texttt{FROM}}, \textcolor{blue}{\texttt{WHERE}},
 ignoring case. It's good practice to use \textbf{all caps for SQL keywords}, and \textbf{lowercase for table and column names}.
-Here's a simple example:\\
+Here's a simple example:
 
 \begin{lstlisting}[style=sql]
     SELECT * FROM my_table
@@ -51,13 +51,25 @@ Now, we are a record company with bands, albums, and songs:
 We created the database, \textcolor{blue}{\texttt{concise\_records}}, and a table \textcolor{blue}{\texttt{bands}}
 with two columns: \textcolor{blue}{\texttt{name}} and \textcolor{blue}{\texttt{id}}.\\
 
+\noindent
+\underline{Pagination of commands don't matter,} for example:
+\begin {lstlisting}[style=sql]
+-- We could have written the above
+CREATE DATABASE concise_records; USE concise_records; CREATE TABLE bands (name VARCHAR(255) NOT NULL);
+
+ALTER
+TABLE
+bands
+ADD COLUMN id INT NOT NULL
+AUTO_INCREMENT PRIMARY KEY;
+\end{lstlisting}
+
+\noindent
+Which is less readable. The \textcolor{blue}{\texttt{PRIMARY KEY}} uniquely IDs each row in a table, helping draw a thread of relationships between tables where the ID is present.\\
 
 \newpage
 
 \noindent
-The \textcolor{blue}{\texttt{PRIMARY KEY}} acts as an ID for each row, useful for
-drawing a thread of relationships between tables where the ID is present.\\
-
 \begin{Def}[Primary Key]
     .A column which identifies each row in a table. It must be unique, and it cannot be \textcolor{blue}{\texttt{NULL}}.
 \end{Def}
@@ -85,7 +97,7 @@ To create our \textcolor{blue}{albums} table:
 \vspace{1em}
 \noindent
 We created the \textcolor{blue}{albums} table with three columns: \textcolor{blue}{\texttt{id}}, \textcolor{blue}{\texttt{name}}, and \textcolor{blue}{\texttt{release\_date}},
-and \textcolor{blue}{\texttt{band\_id}}. A \textcolor{blue}{\texttt{FOREIGN KEY}} uses the \textcolor{blue}{\texttt{PRIMARY KEY}} of another table to establish a relationship between them.\\
+and \textcolor{blue}{\texttt{band\_id}}.\\ A \textcolor{blue}{\texttt{FOREIGN KEY}} uses the \textcolor{blue}{\texttt{PRIMARY KEY}} of another table to establish a relationship between them.\\
 
 \begin{Def}[Foreign Key]
     .A column that references another table's \textcolor{blue}{\texttt{PRIMARY KEY}}.
@@ -112,7 +124,11 @@ So far we have:
 \end{lstlisting}
 
 \noindent
-The database \textcolor{blue}{\texttt{concise\_records}} with our tables \textcolor{blue}{\texttt{bands}} and \textcolor{blue}{\texttt{albums}}.\\
+\begin{itemize}
+    \item The database \textcolor{blue}{\texttt{concise\_records}}
+    \item Tables \textcolor{blue}{\texttt{bands}} and \textcolor{blue}{\texttt{albums}}.
+    \item Column \textcolor{blue}{band\_id} references \textcolor{blue}{id} in \textcolor{blue}{bands}.
+\end{itemize}
 
 \newpage
 
@@ -129,7 +145,7 @@ Let's begin to add data to our tables:
     --     bands
     --     +----+----------------------+
     --     | id | name                 |
-    --     +----+----------------------+
+    --     +----+----------------------+s
     --     | 1  | The Beatles          |
     --     | 2  | The Rolling Stones   |
     --     | 3  | The Who              |
@@ -138,8 +154,7 @@ Let's begin to add data to our tables:
     -- Insert 'Abbey Road', 'Let It Bleed', 'Who's Next' into albums
 
     INSERT INTO albums (name, release_date, band_id) VALUES ('Abbey Road', '1969', 1);
-    INSERT INTO albums (name, release_date, band_id) VALUES ('Let Be', '1970', 1);
-    INSERT INTO albums (name, band_id) VALUES ('Who''s Next', 3);
+    INSERT INTO albums (name, band_id) VALUES ('Let Be', '1970', 1), ('Who''s Next', 3);
 
     -- DB: concise_records
     --
@@ -154,10 +169,13 @@ Let's begin to add data to our tables:
 
 \end{lstlisting}
 
-
+\vspace{-1em}
 \noindent
-\underline{Single quotes denote \textcolor{blue}{strings}.} Double single quotes in strings act as single quotes, seen in
-the above with \textcolor{blue}{\texttt{'Who''s next'}}.\\
+\begin{Note}
+    \textbf{Note:} \underline{Single quotes denote \textcolor{blue}{strings}.} Double single quotes in strings act as single quotes, seen in
+    the above with \textcolor{blue}{\texttt{'Who''s next'}} becoming \textcolor{blue}{\texttt{Who's next}}.
+\end{Note}
+
 
 
 

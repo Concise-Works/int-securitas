@@ -1,6 +1,5 @@
-\subsubsection*{SELECT}
-
-We can also retrieve data from our tables using the \textcolor{blue}{\texttt{SELECT}}:
+\subsection{Queries}
+To retrieve data, we use \textcolor{blue}{\texttt{SELECT}}:
 
 \begin{lstlisting}[style=sql]
     -- Retrieve all columns from bands
@@ -22,7 +21,10 @@ Queries to a table return another table.
 \newpage
 
 \noindent
-To list a few commands:
+\textbf{Examples:}\\
+
+\noindent
+1. \textcolor{blue}{\texttt{SELECT} \textit{column}}
 \begin{lstlisting}[style=sql]
     -- Retrieve the name column from bands
     SELECT name FROM bands;
@@ -36,8 +38,10 @@ To list a few commands:
     --     | The Who              |
     --     +----------------------+
 \end{lstlisting}
+\noindent
+2. \textcolor{blue}{\texttt{LIMIT}}
 \begin{lstlisting}[style=sql]
-    -- Retrieve the name column from bands, limit to 2
+    -- Retrieve the name column from bands, limit to 1    
     SELECT name FROM bands LIMIT 1;
 
     -- Query Result:
@@ -47,19 +51,21 @@ To list a few commands:
     --     | The Beatles          |
     --     +----------------------+
 \end{lstlisting}
+\noindent
+3. \textcolor{blue}{\texttt{AS}}
 \begin{lstlisting}[style=sql]
-    -- Retrieve and give aliases to id and name columns from bands
-    SELECT id AS 'ID', name AS 'Band Name'
+    -- Retrieve and give aliases to id and name columns from bands, limit to 1
+    SELECT id AS 'ID', name AS 'Band Name' LIMIT 1;
 
     -- Query Result:
     --     +----+----------------------+
     --     | ID | Band Name            |
     --     +----+----------------------+
     --     | 1  | The Beatles          |
-    --     | 2  | The Rolling Stones   |
-    --     | 3  | The Who              |
     --     +----+----------------------+
 \end{lstlisting}
+\noindent
+4. \textcolor{blue}{\texttt{ORDER BY (DESC/ASC)}}
 \begin{lstlisting}[style=sql]
     -- Order bands by name in descending order
     SELECT * FROM bands ORDER BY name DESC;
@@ -84,9 +90,10 @@ Here we used the \textcolor{blue}{\texttt{LIMIT}}, \textcolor{blue}{\texttt{AS}}
 
 \newpage
 \noindent
-Say we had the table with the following data:
+5. \textcolor{blue}{\texttt{DISTINCT}}
 
 \begin{lstlisting}[style=sql]
+    -- Say we had the following table:
     -- DB: school_table
     --
     --     students
@@ -111,60 +118,3 @@ Say we had the table with the following data:
     --     | Alvin                |
     --     +----------------------+
 \end{lstlisting}
-
-\subsection*{UPDATE}
-\noindent
-To visit our \textcolor{blue}{\texttt{concise\_records}} example again:
-
-\begin{lstlisting}[style=sql]
-    -- DB: concise_records
-    --
-    --     bands
-    --     +----+----------------------+
-    --     | id | name                 |
-    --     +----+----------------------+
-    --     | 1  | The Beatles          |
-    --     | 2  | The Rolling Stones   |
-    --     | 3  | The Who              |
-    --     +----+----------------------+
-    --    
-    --     albums
-    --     +----+----------------+--------------+---------+
-    --     | id | name           | release_date | band_id |
-    --     +----+----------------+--------------+---------+
-    --     | 1  | Abbey Road     | 1969         | 1       |
-    --     | 2  | Let It Be      | 1970         | 1       |
-    --     | 3  | Who's Next     |              | 3       |
-    --     +----+----------------+--------------+---------+
-\end{lstlisting}
-
-\vspace{1em}
-\noindent
-We will run the \textcolor{blue}{\texttt{UPDATE}} command to change the \textcolor{blue}{\texttt{release\_date}}.
-
-\newpage
-
-\noindent
-To Change the release date of \textcolor{blue}{\texttt{Who's Next} }to 1971:
-\begin{lstlisting}[style=sql]
-    -- We could do
-    UPDATE albums
-    SET release_date = '1971'
-
-    -- But that would result in all albums having the same release date
-    -- instead we use WHERE
-    UPDATE albums SET release_date = '1971' WHERE name = 'Who''s Next';
-
-    -- DB: concise_records
-    --
-    --     albums
-    --     +----+----------------+--------------+---------+
-    --     | id | name           | release_date | band_id |
-    --     +----+----------------+--------------+---------+
-    --     | 1  | Abbey Road     | 1969         | 1       |
-    --     | 2  | Let It Be      | 1970         | 1       |
-    --     | 3  | Who's Next     | 1971         | 3       |
-    --     +----+----------------+--------------+---------+
-\end{lstlisting}
-
-
