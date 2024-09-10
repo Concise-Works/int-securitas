@@ -52,20 +52,21 @@ We created the database, \textcolor{blue}{\texttt{concise\_records}}, and a tabl
 with two columns: \textcolor{blue}{\texttt{name}} and \textcolor{blue}{\texttt{id}}.\\
 
 \noindent
+The \textcolor{blue}{\texttt{PRIMARY KEY}} uniquely IDs each row in a table, helping draw a thread of relationships between tables where the ID is present.\\
+
+\noindent
 \underline{Pagination of commands don't matter,} for example:
 \begin {lstlisting}[style=sql]
 -- We could have written the above
 CREATE DATABASE concise_records; USE concise_records; CREATE TABLE bands (name VARCHAR(255) NOT NULL);
-
-ALTER
-TABLE
+ALTER TABLE
 bands
 ADD COLUMN id INT NOT NULL
 AUTO_INCREMENT PRIMARY KEY;
 \end{lstlisting}
 
 \noindent
-Which is less readable. The \textcolor{blue}{\texttt{PRIMARY KEY}} uniquely IDs each row in a table, helping draw a thread of relationships between tables where the ID is present.\\
+Which is less readable.\\
 
 \newpage
 
