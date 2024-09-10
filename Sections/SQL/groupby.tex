@@ -1,10 +1,7 @@
 \subsection{Grouping Data}
 
 \noindent
-Aggregate functions can be used in conjunction with \textcolor{blue}{\texttt{GROUP BY}} to group data based on a column.\\
-
-\noindent
-Given the following data:
+Aggregates can be used with \textcolor{blue}{\texttt{GROUP BY}} to assist in organizing data. Given:
 \begin{lstlisting}[style=sql]
     -- DB: concise_records
     --
@@ -47,16 +44,15 @@ Given the following data:
 \end{lstlisting}
 
 \noindent
-Selects \bttt{band\_id}, performs \bttt{COUNT} on each ouf our \bttt{band\_id}s.
-The result is grouped by \bttt{band\_id}.\\
+Selects \bttt{band\_id}, performs \bttt{COUNT} on each \bttt{band\_id}s.
+Then group return by \bttt{band\_id}.\\
 
 \noindent
 1b. \textcolor{blue}{\texttt{GROUP BY}} with \textcolor{blue}{\texttt{JOIN}}
 \begin{lstlisting}[style=sql]
     -- Retrieve the count of albums per band
     SELECT bands.name, COUNT(albums.id)
-    FROM bands
-    LEFT JOIN albums ON bands.id = albums.band_id
+    FROM bands LEFT JOIN albums ON bands.id = albums.band_id
     GROUP BY bands.id;
 
     -- Query Result:
