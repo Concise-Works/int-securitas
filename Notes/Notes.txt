@@ -1,0 +1,106 @@
+sources:
+SQL Basics based off https://youtu.be/p3qvj9hO_Bo?si=0-7tLBRKzzSeBn3J
+
+Introduction:
+    - TSA attack
+        - SQL injection on login
+        - sql query just string
+        - if no sanitize string string can be put in 
+        - WHERE field = '$email' 
+        - my attack WHERE field = '(my Query')';
+            - the attack:
+                ----------------------------------
+                input: 'hello'
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'hello'';
+
+                "we sent your email to random.user@example.com"
+                ----------------------------------
+
+                input: anything' AND 'x
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'anything' AND 'x';
+
+                "we sent your email to random.user@example.com"
+                ----------------------------------
+
+                input: 'x' AND email is NULL; --
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'x' AND email is NULL; --';
+
+                "" returns nothing, we know this is a table name
+                -- allows us to create a comment so the last '; isn't read
+                ----------------------------------------------------------
+                input: x' AND 1=(SELECT COUNT(*) FROM tabname);--
+
+                SELECT fieldlist
+                FROM   table
+                WHERE  field = 'x' AND 1=(SELECT COUNT(*) FROM tabname);--';
+                
+                "" checks to see if tabname is the name of the table
+
+                ------------------------------------------------------------
+                given a text input we can probe the server
+                we figure out we can send information
+                we figure out the names of the tabs
+                we figure out the table
+                write queries that probe if it returns nothing it's a valid Query
+                if not we try again
+
+-prepared SQL, ORM (Object Relational Mapping), prepared statement,
+    each language has prepared statements to make sure strings stay
+    strings, i.e., a function that sanitizes our inputs
+-parameterized inputs
+
+URL, structure
+
+Threat modelling:
+    eavesdropper: can read, can't modify add or delete.
+    Man in the middle (MINTM): can read, add drop modify
+
+HTTP vs HTTPS
+
+HTTPS
+    eavesdropper: looking at your information won't be able to understand it
+    mitm, man in the middle: if someone messes with information that passes the connection breaks
+
+HTTP
+    they would be able to do that.
+
+TRACE ROUTE
+    tracert baidu.cn, there are multiple router hops to reach a server
+
+
+CROSS SITE SCRIPTING
+    manipulating the query of a url, if the inputs aren't sanitized we could write code
+
+CLIENT SERVER PROTOCOL 
+    HTTP, HTTPS: requests initiated by the client to the server, then sends it back.
+
+HEADER AND PAYLOAD
+    HTTP requests
+        METHOD GET, POST, etc
+        GET  /index.html HTTP/1.1
+    HTTP response
+
+HTTPS = HTTP ovr TLS
+    https is just saying, running http over TLS an encrypter
+
+HTML
+    when receving htm, that's a requests, but a page has multiple links,
+    and those things need to be requested at well.
+
+TRACKING PIXELS
+    
+        
+
+
+
+
+

@@ -26,17 +26,16 @@ Again, visiting our \textcolor{blue}{\texttt{concise\_records}} example:
 
 \vspace{1em}
 \noindent
-We will begin to update and filter for specific entries.
+\textbf{Examples:} \textit{(next page.)}
 
 \newpage
 
 \noindent
-To change the release date of \textcolor{blue}{\texttt{Who's Next} }to `1971':
+1.
 \begin{lstlisting}[style=sql]
+    -- change the release date of Who's Next `1971':
     UPDATE albums SET release_date = '1971';
-    -- But that would result in all albums having the same release date
-    -- instead we use WHERE
-
+    -- This would make all albums have the same release date, instead we use WHERE
     UPDATE albums SET release_date = '1971' WHERE id = 3;
 
     -- DB: concise_records
@@ -54,10 +53,9 @@ To change the release date of \textcolor{blue}{\texttt{Who's Next} }to `1971':
 \noindent
 We used \textcolor{blue}{\texttt{id}}, as the \textcolor{blue}{\texttt{name}} could change or
 be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions.\\
-\textbf{Examples:}\\
 
 \noindent
-1. \textcolor{blue}{\texttt{>, <, >=, <=}}
+2. \textcolor{blue}{\texttt{>, <, >=, <=}}
 \begin{lstlisting}[style=sql]
     -- Select all albums with a release date greater than 1969
     SELECT * FROM albums WHERE release_date > 1969;
@@ -73,7 +71,7 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
 \end{lstlisting}
 
 \noindent
-2. \textcolor{blue}{\texttt{LIKE}}
+3. \textcolor{blue}{\texttt{LIKE}}
 \begin{lstlisting}[style=sql]
     -- Select all albums that contain 'be' in their name
     SELECT * FROM albums WHERE name LIKE '%be%';
@@ -86,8 +84,12 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
     --     +----+----------------+--------------+---------+
     
 \end{lstlisting}
+
 \noindent
-3. \textcolor{blue}{\texttt{OR}}
+\underline{`\bt{\%}' \textbf{wildcard character}}: E.g. strings `\bt{\%}x' end with `x', `x\bt{\%}', start with `x', `\bt{\%}x\bt{\%}' contain `x'.\\
+
+\noindent
+4. \textcolor{blue}{\texttt{OR}}
 \begin{lstlisting}[style=sql]
     -- Albums that contain 'x' in their name OR have a release date of 1969 
     SELECT * FROM albums WHERE name LIKE '%x%' OR band_id = 1;
@@ -104,7 +106,7 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
 \newpage
 
 \noindent
-4. \textcolor{blue}{\texttt{AND}}
+5. \textcolor{blue}{\texttt{AND}}
 \begin{lstlisting}[style=sql]
     -- Select all albums that released in 1969 and have an band_id of 1
     SELECT * FROM albums WHERE release_date = 1969 AND band_id = 1;
@@ -118,7 +120,7 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
 \end{lstlisting}
 
 \noindent
-5. \textcolor{blue}{\texttt{BETWEEN}}
+6. \textcolor{blue}{\texttt{BETWEEN}}
 \begin{lstlisting}[style=sql]
     -- Select all albums that released between 1969 and 1971 (incluvise)
     SELECT * FROM albums WHERE release_date BETWEEN 1900 AND 1980;
@@ -135,7 +137,7 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
 \end{lstlisting}
 
 \noindent
-6a. \textcolor{blue}{\texttt{IS NULL}}
+7a. \textcolor{blue}{\texttt{IS NULL}}
 
 \begin{lstlisting}[style=sql]
     -- Add a new album with a NULL release date
@@ -154,7 +156,7 @@ be duplicated. \textcolor{blue}{\texttt{WHERE}} filters rows based on conditions
 \end{lstlisting}
 
 \noindent
-6b. \textcolor{blue}{\texttt{DELETE}}
+7b. \textcolor{blue}{\texttt{DELETE}}
 
 \begin{lstlisting}[style=sql]
     -- Delete all albums
