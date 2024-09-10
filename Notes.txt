@@ -1,3 +1,6 @@
+sources:
+SQL from https://youtu.be/p3qvj9hO_Bo?si=0-7tLBRKzzSeBn3J
+
 Introduction:
     - TSA attack
         - SQL injection on login

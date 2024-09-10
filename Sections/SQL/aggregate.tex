@@ -1,0 +1,108 @@
+
+\subsection{Aggregate Functions}
+
+\noindent
+We can aggregate, i.e., decipher trends in our data via computational functions. Our data:
+
+\begin{lstlisting}[style=sql]
+    -- DB: concise_records
+    --
+    --     bands
+    --     +----+----------------------+
+    --     | id | name                 |
+    --     +----+----------------------+
+    --     | 1  | The Beatles          |
+    --     | 2  | The Rolling Stones   |
+    --     | 3  | The Who              |
+    --     +----+----------------------+
+    --    
+    --     albums
+    --     +----+----------------+--------------+---------+
+    --     | id | name           | release_date | band_id |
+    --     +----+----------------+--------------+---------+
+    --     | 1  | Abbey Road     | 1969         | 1       |
+    --     | 2  | Let It Be      | 1970         | 1       |
+    --     | 3  | Who's Next     | 1971         | 3       |
+    --     +----+----------------+--------------+---------+
+\end{lstlisting}
+
+\noindent
+\textbf{Examples:}\\
+
+\noindent
+1. \textcolor{blue}{\texttt{AVG()}}
+\begin{lstlisting}[style=sql]
+    -- Retrieve the average release date of albums
+    SELECT AVG(release_date) FROM albums;
+
+    -- Query Result:
+    --     +------------------+
+    --     | AVG(release_date)|
+    --     +------------------+
+    --     | 1970             |
+    --     +------------------+
+\end{lstlisting}
+\noindent
+2. \textcolor{blue}{\texttt{SUM()}}
+\begin{lstlisting}[style=sql]
+    -- Retrieve the sum of release dates of albums
+    SELECT SUM(release_date) FROM albums;
+
+    -- Query Result:
+    --     +------------------+
+    --     | SUM(release_date)|
+    --     +------------------+
+    --     | 5910             |
+    --     +------------------+
+\end{lstlisting}
+\noindent
+3. \textcolor{blue}{\texttt{COUNT()}}
+\begin{lstlisting}[style=sql]
+    -- Retrieve the count of albums
+    SELECT COUNT(*) FROM albums;
+
+    -- Query Result:
+    --     +----------+
+    --     | COUNT(*) |
+    --     +----------+
+    --     | 3        |
+    --     +----------+
+\end{lstlisting}
+
+\noindent
+There are plenty of aggregate functions, which are provided by the \underline{\textbf{MySQL documentation}.}\\
+
+\vspace{1em}
+
+\begin{tabular}{|c|p{8cm}|}
+    \hline
+    \rowcolor{OliveGreen!10} \textbf{NAME} & \textbf{DESCRIPTION}                             \\
+    \hline
+    AVG()                                  & Return the average value of the argument         \\
+    \rowcolor{black!5} BIT\_AND()          & Return bitwise AND                               \\
+    BIT\_OR()                              & Return bitwise OR                                \\
+    \rowcolor{black!5} BIT\_XOR()          & Return bitwise XOR                               \\
+    COUNT()                                & Return a count of the number of rows returned    \\
+    \rowcolor{black!5} COUNT(DISTINCT)     & Return the count of a number of different values \\
+    GROUP\_CONCAT()                        & Return a concatenated string                     \\
+    \rowcolor{black!5} JSON\_ARRAYAGG()    & Return result set as a single JSON array         \\
+    JSON\_OBJECTAGG()                      & Return result set as a single JSON object        \\
+    \rowcolor{black!5} MAX()               & Return the maximum value                         \\
+    MIN()                                  & Return the minimum value                         \\
+    \rowcolor{black!5} STD()               & Return the population standard deviation         \\
+    STDDEV()                               & Return the population standard deviation         \\
+    \rowcolor{black!5} STDDEV\_POP()       & Return the population standard deviation         \\
+    STDDEV\_SAMP()                         & Return the sample standard deviation             \\
+    \rowcolor{black!5} SUM()               & Return the sum                                   \\
+    VAR\_POP()                             & Return the population standard variance          \\
+    \rowcolor{black!5} VAR\_SAMP()         & Return the sample variance                       \\
+    VARIANCE()                             & Return the population standard variance          \\
+    \hline
+\end{tabular}
+
+\vspace{1em}
+\begin{centering}
+    \textit{This table is taken from the MySQL documentation.\\}
+\end{centering}
+
+\noindent
