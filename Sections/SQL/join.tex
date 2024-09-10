@@ -33,7 +33,7 @@ SELECT * FROM bands JOIN albums;
 This command doesn't specify how to combine the tables, so the \textbf{Cartesian product} is returned.\\
 
 \begin{Def}[Cartesian Product]
-    .Sets $A=\{a_1,a_2,...,a_n\}$, $B=\{b_1,b_2,...,b_m\}$ can match in ordered pairs, e.g.,\\
+    .Sets $A=\{a_1,a_2,...,a_n\}$, $B=\{b_1,b_2,...,b_m\}$ match in ordered pairs, e.g.,\\
     $(a_2,b_5)$ or $(a_9, b_3)$. The set of all ordered pair combinations of $A$ on $B$ is the Cartesian product.\\
 
     \noindent
@@ -101,7 +101,7 @@ There are plenty of other join types, here's all of them:
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \begin{tikzpicture}
-            \node at (0, 0) {1. INNER JOIN};
+            \node at (-1.3, 0) {1. INNER JOIN};
             \node at (-.5, -3) {\bt{SELECT} * \bt{FROM} A};
             \node at (.7, -3.5) {\bt{INNER JOIN} B \bt{ON} A.Key = B.Key};
 
@@ -121,8 +121,8 @@ There are plenty of other join types, here's all of them:
         \centering
         \begin{tikzpicture}
             \node at (0, 0) {2. LEFT JOIN (LEFT OUTER JOIN)};
-            \node at (-.5, -3) {\bt{SELECT} * \bt{FROM} A};
-            \node at (.7, -3.5) {\bt{LEFT JOIN} B \bt{ON} A.Key = B.Key};
+            \node at (-0.8, -3) {\bt{SELECT} * \bt{FROM} A};
+            \node at (0.3, -3.5) {\bt{LEFT JOIN} B \bt{ON} A.Key = B.Key};
 
             \begin{scope}[shift={(0, -3)}]
                 \draw[thick] (-.5,1.5) circle (1);
@@ -139,11 +139,10 @@ There are plenty of other join types, here's all of them:
 
 % RIGHT JOIN
 \begin{figure}[htbp]
-    \centering
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \begin{tikzpicture}
-            \node at (0, 0) {3. RIGHT JOIN (RIGHT OUTER JOIN)};
+            \node at (.5, 0) {3. RIGHT JOIN (RIGHT OUTER JOIN)};
             \node at (-.5, -3) {\bt{SELECT} * \bt{FROM} A};
             \node at (.7, -3.5) {\bt{RIGHT JOIN} B \bt{ON} A.Key = B.Key};
 
@@ -164,7 +163,8 @@ There are plenty of other join types, here's all of them:
         \begin{tikzpicture}
             \node at (0, 0) {4. LEFT JOIN with NULL check};
             \node at (-.5, -3) {\bt{SELECT} * \bt{FROM} A};
-            \node at (.7, -3.5) {\bt{LEFT JOIN} B \bt{ON} A.Key = B.Key \bt{WHERE} B.Key \bt{IS NULL}};
+            \node at (.6, -3.5) {\bt{LEFT JOIN} B \bt{ON} A.Key = B.Key};
+            \node at (-.2, -4) {\bt{WHERE} B.Key \bt{IS NULL}};
 
             \begin{scope}[shift={(0, -3)}]
                 \draw[thick] (-.5,1.5) circle (1);
@@ -183,13 +183,13 @@ There are plenty of other join types, here's all of them:
 
 % RIGHT JOIN with NULL check
 \begin{figure}[htbp]
-    \centering
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \begin{tikzpicture}
             \node at (0, 0) {5. RIGHT JOIN with NULL check};
             \node at (-.5, -3) {\bt{SELECT} * \bt{FROM} A};
-            \node at (.7, -3.5) {\bt{RIGHT JOIN} B \bt{ON} A.Key = B.Key \bt{WHERE} A.Key \bt{IS NULL}};
+            \node at (.7, -3.5) {\bt{RIGHT JOIN} B \bt{ON} A.Key = B.Key};
+            \node at (-.2, -4) {\bt{WHERE} A.Key \bt{IS NULL}};
 
             \begin{scope}[shift={(0, -3)}]
                 \draw[thick] (-.5,1.5) circle (1);
@@ -210,7 +210,7 @@ There are plenty of other join types, here's all of them:
         \begin{tikzpicture}
             \node at (0, 0) {6. FULL OUTER JOIN};
             \node at (-.5, -3) {\bt{SELECT} * \bt{FROM} A};
-            \node at (.7, -3.5) {\bt{FULL OUTER JOIN} B \bt{ON} A.Key = B.Key};
+            \node at (1.3, -3.5) {\bt{FULL OUTER JOIN} B \bt{ON} A.Key = B.Key};
 
             \begin{scope}[shift={(0, -3)}]
                 \draw[thick] (-.5,1.5) circle (1);
@@ -223,3 +223,32 @@ There are plenty of other join types, here's all of them:
         \end{tikzpicture}
     \end{minipage}
 \end{figure}
+\begin{figure}[hbt!]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+        \begin{adjustwidth}{.8em}{0pt}
+            \noindent
+            7. CROSS JOIN\\
+
+            \noindent
+            \bt{SELECT} * \bt{FROM} A \bt{CROSS JOIN} B $\equiv$\\
+            \bt{SELECT} * \bt{FROM} A \bt{JOIN} B \hspace{3.3em} $\equiv$\\
+            $A\times B$ The \textbf{Cartesian product}.\\
+        \end{adjustwidth}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \begin{tikzpicture}
+            \node[draw, rectangle, text width=20em, inner sep=6pt, align=left] {
+                \vspace{.3em}
+
+                Sets $A = \{a_1, a_2, ..., a_n\}, B = \{b_1, b_2, ..., b_m\}$ can match in ordered pairs, e.g., $(a_2, b_5)$ or $(a_3, b_3)$. The set of all ordered pair combinations of $A$ on $B$ is the Cartesian product. \\
+                \vspace{0.3em}
+                Denoted: $A \times B$.
+            };
+            \draw[black, fill=black] (-3.5, 1.1) rectangle (.6, 1.5);
+            \node at (-1.7, 1.3) {\textcolor{white}{\textbf{Cartesian Product}}};
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
